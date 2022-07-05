@@ -60,7 +60,7 @@ public class OrderDAO {
         ResultSet rs = null;
         
         try {
-            pstmt = conn.prepareStatement("select a.ucId, a.pId, a.cQuantity, b.pName, b.price, b.thumbnail "
+            pstmt = conn.prepareStatement("select a.ucId, a.mId, a.pId, a.cQuantity, b.pName, b.price, b.thumbnail "
                     + "from userCart a, product b "
                     + "where a.mId=? and a.pid = b.pid "
                     + "order by ucId desc");
@@ -68,16 +68,16 @@ public class OrderDAO {
             
             rs = pstmt.executeQuery();
             
-            if (rs.next()) {
-                List<UserCartDTO> cartList = new ArrayList<UserCartDTO>();
+            if(rs.next()) {
                 
+                List<UserCartDTO> cartList = new ArrayList<UserCartDTO>();                
                 do {
                     cartList.add(makeUserCartFromResultSet(rs));
                 } while (rs.next());
                 
                 return cartList;
                 
-            } else {
+            }else {
                 return Collections.emptyList();
             }
         } finally {
@@ -89,7 +89,7 @@ public class OrderDAO {
     public void deleteCart(Connection conn, int ucId) throws SQLException {
         
         PreparedStatement pstmt = null;        
-        pstmt = conn.prepareStatement("delete from userCart where ucId= ?");
+        pstmt = conn.prepareStatement("delete from userCart where ucId=?");
         pstmt.setInt(1, ucId);
         pstmt.executeUpdate();
     }

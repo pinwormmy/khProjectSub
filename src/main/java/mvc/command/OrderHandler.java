@@ -30,14 +30,12 @@ public class OrderHandler implements CommandHandler {
             
         }else if(fromPath.equals("/addCart.do")) {     
             
-            UserCartDTO cart = new UserCartDTO();
-                   
+            UserCartDTO cart = new UserCartDTO();     
+            
             String mId = req.getParameter("mId");
             int pId = Integer.parseInt(req.getParameter("pId"));
             int cQuantity = Integer.parseInt(req.getParameter("cQuantity"));
-            
-            System.out.println("컨트롤러받아온 파라미터 테스트: " + mId + pId + cQuantity);
-            
+                        
             cart.setmId(mId);
             cart.setpId(pId);
             cart.setcQuantity(cQuantity);            
@@ -49,11 +47,12 @@ public class OrderHandler implements CommandHandler {
                         
         }else if(fromPath.equals("/deleteCart.do")) {
             
-            int pcId = Integer.parseInt(req.getParameter("pcId"));
-            orderService.deleteCart(pcId);
+            String mId = req.getParameter("mId");
+            int ucId = Integer.parseInt(req.getParameter("ucId"));
+            orderService.deleteCart(ucId);
             
             req.setAttribute("msg", "장바구니에 있던 상품을 삭제했습니다~");
-            req.setAttribute("url", "cart.do");                            
+            req.setAttribute("url", "cart.do?mId=" + mId);                            
             toPath = "/WEB-INF/view/alert.jsp";
             
         }else if(fromPath.equals("/checkout.do")) {     

@@ -58,7 +58,7 @@
 											<td class=""> ${cart.cQuantity} </td>
 											<td class="">												
 												<a class="product-remove"
-												href="<%=request.getContextPath()%>/deleteCart.do?ucId=${cart.ucId}">삭제</a> 												
+												href="<%=request.getContextPath()%>/deleteCart.do?mId=${member.mId}&ucId=${cart.ucId}">삭제</a> 												
 											</td>
 										</tr>
 									</c:forEach>
