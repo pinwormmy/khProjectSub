@@ -92,7 +92,7 @@
 							</div>
 						</div>
 						<input type="hidden" name="pId" value="<%=rs.getString("pId")%>">
-						<button type="button" class="btn btn-main mt-20" id="cartBtn" onclick="checkQuantity();">Add To Cart</button>
+						<button type="button" class="btn btn-main mt-20" id="cartBtn" onclick="checkCartRequired();">Add To Cart</button>
 					</form>
 					
 				</div>
@@ -100,7 +100,15 @@
 		</div>
 		
 		<script>
+			
+			function checkCartRequired(){	
+								
+				checkLogin();
+			}
+		
 			function checkQuantity(){
+				
+				alert("수량함수 테스트!!@!@!");
 				
 				let addCartForm = document.getElementById("addCartForm");
 				
@@ -108,6 +116,19 @@
 					addCartForm.submit();
 				else
 					alert("수량을 하나 이상 골라주세요!!!!")
+			}	
+			
+			function checkLogin(){
+				
+				let member = <%=session.getAttribute("member")%>;
+				
+				if(member == null){
+					alert("로그인이 필요합니다!!");
+					location.href='<%=request.getContextPath()%>/login.do';				
+				}else{
+					alert("로긴확인 테스트!!@!@!");
+					checkQuantity();
+				}
 			}
 		</script>
 

@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import model.dto.NuserCartDTO;
+import model.dto.MemberDTO;
+import model.dto.UserCartDTO;
 import model.service.OrderService;
 
 public class OrderHandler implements CommandHandler {
@@ -18,15 +20,16 @@ public class OrderHandler implements CommandHandler {
         String fromPath = req.getRequestURI().substring(req.getContextPath().length());
         String toPath = null;
         
-        if(fromPath.equals("/cart.do")) {                  
-
-            List<NuserCartDTO> nCartList = orderService.showNuserCart();   
-            req.setAttribute("cartList", nCartList); 
+        if(fromPath.equals("/cart.do")) {      
+            
+            List<UserCartDTO> cartList = orderService.showUserCart();   
+            req.setAttribute("cartList", cartList); 
             
             toPath = "/WEB-INF/view/order/cart.jsp";
             
         }else if(fromPath.equals("/addCart.do")) {
             
+                   
             int pId = Integer.parseInt(req.getParameter("pId"));
             int quantity = Integer.parseInt(req.getParameter("quantity"));
             
@@ -47,10 +50,11 @@ public class OrderHandler implements CommandHandler {
             
         }else if(fromPath.equals("/checkout.do")) {     
             
-            List<NuserCartDTO> nCartList = orderService.showNuserCart();
-            req.setAttribute("cartList", nCartList); 
+            List<UserCartDTO> cartList = orderService.showUserCart();
+            req.setAttribute("cartList", cartList); 
             
             toPath = "/WEB-INF/view/order/checkout.jsp";
+            
         }else if(fromPath.equals("/confirmation.do")) {                       
             
             toPath = "/WEB-INF/view/order/confirmation.jsp";

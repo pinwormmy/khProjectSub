@@ -142,9 +142,11 @@ FACEBOOK: https://www.facebook.com/themefisher
 								<div class="cart-summary">
 									<span>Total</span> <span class="total-price">$1799.00</span>
 								</div>
+								<!-- 로그인 여부에 따라 카트 아니면 로그인 화면. 이거 구분처리 컨트롤러에서 해야할 듯하지만, 일단 이렇게 구현 -->
 								<ul class="text-center cart-buttons">
-									<li><a href="<%=request.getContextPath()%>/cart.do" class="btn btn-small">View
-											Cart</a></li>
+									<li><a 	<c:if test="${member != null}">href="<%=request.getContextPath()%>/cart.do"</c:if>
+									<c:if test="${member == null}">href="<%=request.getContextPath()%>/login.do"</c:if>
+									class="btn btn-small">View Cart</a></li>
 									<li><a href="<%=request.getContextPath()%>/checkout.do"
 										class="btn btn-small btn-solid-border">Checkout</a></li>
 								</ul>
@@ -175,50 +177,15 @@ FACEBOOK: https://www.facebook.com/themefisher
 								class="tf-ion-ios-arrow-down"></span></a>
 							<ul class="dropdown-menu">
 								<c:if test="${member == null}">
-									<li><a href="login.do">logIn</a></li>
-									<li><a href="signUp.do">signUp</a></li>
+									<li><a href="<%=request.getContextPath()%>/login.do">logIn</a></li>
+									<li><a href="<%=request.getContextPath()%>/signUp.do">signUp</a></li>
 								</c:if>
 								<c:if test="${member != null}">
 									<li>${member.mName} 님께서 로그인 중입니다.</li>
-									<li><a href="logout.do">Logout</a></li>
+									<li><a href="<%=request.getContextPath()%>/logout.do">Logout</a></li>
 								</c:if>
 							</ul></li>
-						<!-- logIn -->		
-						<!-- logIn 
-						<li class="dropdown dropdown-slide"><a href="#!"
-							class="dropdown-toggle" data-toggle="dropdown"
-							data-hover="dropdown" data-delay="350" role="button"
-							aria-haspopup="true" aria-expanded="false"> LogIn <span
-								class="tf-ion-ios-arrow-down"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#!">logIn</a></li>
-								<li><a href="#!">signIn</a></li>
-							</ul></li>
-						 logIn -->
-
-						<!-- Languages 
-						<li class="commonSelect"><select class="form-control">
-								<option>KOREAN</option>
-								<option>ENGLISH</option>
-						</select></li>
-						 / Languages -->
-
-						<!--한얼님 작성하셨던 부분 혹시 몰라 남겨둡니다
-							<li class="commonSelect"><select class="form-control">
-								
-								<c:if test="${member == null}">
-									<button onclick="location.href='login.do'">임시로그인버튼</button>
-									<button onclick="location.href='signUp.do'">회원가입</button>
-								</c:if>
-								<c:if test="${member != null}">로그인테스트용(글자왜여깄니) : ${member.mName} 님 로그인 중..
-								<button type="button" onclick="location.href='logout.do'">로그아웃</button>
-								</c:if>
-							</select></li>-->
-
-
 					</ul>
-					<!-- / .nav .navbar-nav .navbar-right -->
-
 				</div>
 			</div>
 		</div>

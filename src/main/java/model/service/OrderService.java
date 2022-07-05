@@ -7,7 +7,7 @@ import java.util.List;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import model.dao.OrderDAO;
-import model.dto.NuserCartDTO;
+import model.dto.UserCartDTO;
 
 //서브 파일이다 원본파일이랑 구분 잘해라!!!
 
@@ -16,14 +16,13 @@ import model.dto.NuserCartDTO;
 public class OrderService {
 	
 	private static OrderService instance = new OrderService();
-
 	public static OrderService getInstance() {
 		return instance;
 	}
-
 	private OrderService() {
 	}
-	public List<NuserCartDTO> showNuserCart() {
+	
+	public List<UserCartDTO> showUserCart() {
 		
         Connection conn = null;
         
@@ -31,7 +30,7 @@ public class OrderService {
             conn = ConnectionProvider.getConnection();
             OrderDAO orderDAO = OrderDAO.getInstance();
             
-            return orderDAO.showNuserCart(conn);
+            return orderDAO.showUserCart(conn);
             
         } catch (SQLException e) {
             JdbcUtil.printSQLException(e);
@@ -54,14 +53,14 @@ public class OrderService {
         }   
     }
 
-    public void deleteCart(int ncId) {
+    public void deleteCart(int ucId) {
         
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             OrderDAO orderDAO = OrderDAO.getInstance();
             
-            orderDAO.deleteCart(conn, ncId);
+            orderDAO.deleteCart(conn, ucId);
             
         } catch (SQLException e) {
             JdbcUtil.printSQLException(e);
