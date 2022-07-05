@@ -49,45 +49,19 @@
 											<td class="">
 												<div class="product-info">
 													<img width="80"
-														src="<%=request.getContextPath()%>/aviato/images/shop/cart/bibimbap.jpg" alt="" /> 
+														src="<%=request.getContextPath()%>${cart.thumbnail}" alt="" /> 
 														<a href="<%=request.getContextPath()%>/shop/detail.do?pId=${cart.pId}"> ${cart.pName}</a>
 												</div>
 											</td>
-											<td class="">${cart.price * cart.quantity}</td>
+											<td class="">${cart.price * cart.cQuantity}</td>
 											<!-- <td class=""><input type=number id="stuff" value="1" min="1" max="100"></td> -->
-											<td class=""> ${cart.quantity} </td>
+											<td class=""> ${cart.cQuantity} </td>
 											<td class="">												
 												<a class="product-remove"
-												href="<%=request.getContextPath()%>/deleteCart.do?ncId=${cart.ncId}">삭제</a> 												
+												href="<%=request.getContextPath()%>/deleteCart.do?ucId=${cart.ucId}">삭제</a> 												
 											</td>
 										</tr>
 									</c:forEach>
-										<!-- <tr class="">
-                      <td class="">
-                        <div class="product-info">
-                          <img width="80" src="/aviato/images/shop/cart/food.jpg" alt="" />
-                          <a href="#!">해물 비빔 쌀국수 밀키트(5EA)</a>
-                        </div>
-                      </td>
-                      <td class="">23,000원</td>
-                      <td class=""><input type=number id="stuff" value="1" min="1" max="100"></td>
-                      <td class="">
-                        <a class="product-remove" href="#!">삭제</a>
-                      </td>
-                    </tr>
-                    <tr class="">
-                      <td class="">
-                        <div class="product-info">
-                          <img width="80" src="/aviato/images/shop/cart/pasta.jpg" alt="" />
-                          <a href="#!">토마토 파스타 밀키트(2EA)</a>
-                        </div>
-                      </td>
-                      <td class="">17,000원</td>
-                      <td class=""><input type=number id="stuff" value="1" min="1" max="100"></td>
-                      <td class="">
-                        <a class="product-remove" href="#!">삭제</a>
-                      </td>
-                    </tr> -->
 									</tbody>
 								</table>
 					

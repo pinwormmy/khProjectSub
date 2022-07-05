@@ -6,7 +6,7 @@
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.SQLException"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jspf" %>
 
 <section class="single-product">
@@ -74,7 +74,10 @@
 			<div class="col-md-7">
 				<div class="single-product-details">
 				
-					<form action="<%=request.getContextPath()%>/addCart.do" id="addCartForm">		
+					<form action="<%=request.getContextPath()%>
+						<c:if test="${member != null}">/addCart.do</c:if>
+						<c:if test="${member == null}">/login.do</c:if>
+					" id="addCartForm">						
 						<h2><%=rs.getString("pname")%></h2>
 						<p class="product-price"><%=df.format(rs.getInt("price"))%>원</p>
 	
@@ -88,48 +91,32 @@
 						<div class="product-quantity">
 							<span>주문 수량</span>
 							<div class="product-quantity-slider">
-								<input id="product-quantity" type="text" value="0" name="quantity">
+								<input id="product-quantity" type="text" value="0" name="cQuantity">
 							</div>
 						</div>
+						<input type="hidden" name=mId value="${member.mId}">
 						<input type="hidden" name="pId" value="<%=rs.getString("pId")%>">
-						<button type="button" class="btn btn-main mt-20" id="cartBtn" onclick="checkCartRequired();">Add To Cart</button>
+						<button type="button" class="btn btn-main mt-20" id="cartBtn" onclick="checkQuantity();">Add To Cart</button>
 					</form>
 					
 				</div>
 			</div>
 		</div>
 		
-		<script>
-			
-			function checkCartRequired(){	
-								
-				checkLogin();
-			}
+		<script>			
 		
-			function checkQuantity(){
-				
-				alert("수량함수 테스트!!@!@!");
+			function checkQuantity(){				
 				
 				let addCartForm = document.getElementById("addCartForm");
 				
-				if(addCartForm.quantity.value > 0)
+				if(addCartForm.cQuantity.value > 0){
 					addCartForm.submit();
-				else
+				}else
 					alert("수량을 하나 이상 골라주세요!!!!")
 			}	
 			
-			function checkLogin(){
-				
-				let member = <%=session.getAttribute("member")%>;
-				
-				if(member == null){
-					alert("로그인이 필요합니다!!");
-					location.href='<%=request.getContextPath()%>/login.do';				
-				}else{
-					alert("로긴확인 테스트!!@!@!");
-					checkQuantity();
-				}
-			}
+			
+			
 		</script>
 
 		<div class="row">

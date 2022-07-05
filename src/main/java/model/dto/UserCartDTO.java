@@ -5,7 +5,7 @@ public class UserCartDTO {
     private int ucId;
     private String mId;
     private int pId;
-    private int quantity;
+    private int cQuantity;
     
     // 카트보기에서 조인하는 product 테이블 내용. 스프링에서 다른 방법 찾아보기
     private String pName;
@@ -31,11 +31,11 @@ public class UserCartDTO {
     public void setpId(int pId) {
         this.pId = pId;
     }
-    public int getQuantity() {
-        return quantity;
+    public int getcQuantity() {
+        return cQuantity;
     }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setcQuantity(int cQuantity) {
+        this.cQuantity = cQuantity;
     }
     public String getpName() {
         return pName;

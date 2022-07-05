@@ -22,27 +22,35 @@ public class OrderHandler implements CommandHandler {
         
         if(fromPath.equals("/cart.do")) {      
             
-            List<UserCartDTO> cartList = orderService.showUserCart();   
+            String mId = req.getParameter("mId");
+            List<UserCartDTO> cartList = orderService.showUserCart(mId);   
             req.setAttribute("cartList", cartList); 
             
             toPath = "/WEB-INF/view/order/cart.jsp";
             
-        }else if(fromPath.equals("/addCart.do")) {
+        }else if(fromPath.equals("/addCart.do")) {     
             
+            UserCartDTO cart = new UserCartDTO();
                    
+            String mId = req.getParameter("mId");
             int pId = Integer.parseInt(req.getParameter("pId"));
-            int quantity = Integer.parseInt(req.getParameter("quantity"));
+            int cQuantity = Integer.parseInt(req.getParameter("cQuantity"));
             
-            orderService.addCart(pId, quantity);
+            System.out.println("컨트롤러받아온 파라미터 테스트: " + mId + pId + cQuantity);
+            
+            cart.setmId(mId);
+            cart.setpId(pId);
+            cart.setcQuantity(cQuantity);            
+            orderService.addCart(cart);
             
             req.setAttribute("msg", "장바구니에 넣었습니다~");
-            req.setAttribute("url", "cart.do"); // 테스트 확인 차원에서 카트로 이동 
+            req.setAttribute("url", "cart.do?mId=" + mId); // 테스트 확인 차원에서 카트로 이동 
             toPath = "/WEB-INF/view/alert.jsp";
                         
         }else if(fromPath.equals("/deleteCart.do")) {
             
-            int ncId = Integer.parseInt(req.getParameter("ncId"));
-            orderService.deleteCart(ncId);
+            int pcId = Integer.parseInt(req.getParameter("pcId"));
+            orderService.deleteCart(pcId);
             
             req.setAttribute("msg", "장바구니에 있던 상품을 삭제했습니다~");
             req.setAttribute("url", "cart.do");                            
@@ -50,7 +58,8 @@ public class OrderHandler implements CommandHandler {
             
         }else if(fromPath.equals("/checkout.do")) {     
             
-            List<UserCartDTO> cartList = orderService.showUserCart();
+            String mId = req.getParameter("mId");
+            List<UserCartDTO> cartList = orderService.showUserCart(mId);
             req.setAttribute("cartList", cartList); 
             
             toPath = "/WEB-INF/view/order/checkout.jsp";

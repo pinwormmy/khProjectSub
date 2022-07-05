@@ -24,14 +24,14 @@ public class OrderDAO {
 	}	
 	private OrderDAO() {}
 	
-	private UserCartDTO makeUserFromResultSet(ResultSet rs) throws SQLException {
+	private UserCartDTO makeUserCartFromResultSet(ResultSet rs) throws SQLException {
 		
 	    UserCartDTO userCart = new UserCartDTO();
         
 	    userCart.setUcId(rs.getInt("ucId"));
-	    userCart.setpId(rs.getInt("pId"));
 	    userCart.setmId(rs.getString("mId"));
-	    userCart.setQuantity(rs.getInt("quantity"));	    
+	    userCart.setpId(rs.getInt("pId"));	    
+	    userCart.setcQuantity(rs.getInt("cQuantity"));	    
 	    userCart.setpName(rs.getString("pName"));	    
 	    userCart.setPrice(rs.getInt("price"));	    
 	    userCart.setThumbnail(rs.getString("thumbnail"));	    
@@ -54,24 +54,25 @@ public class OrderDAO {
         return orderDTO;
     }
 	
-	public List<UserCartDTO> showUserCart(Connection conn) throws SQLException {
+	public List<UserCartDTO> showUserCart(Connection conn, String id) throws SQLException {
 	    
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         
         try {
-            pstmt = conn.prepareStatement("select a.ucId, a.pId, a.quantity, b.pName, b.price, b.thumbnail "
-                    + "from nUserCart a, product b "
-                    + "where a.pid = b.pid "
+            pstmt = conn.prepareStatement("select a.ucId, a.pId, a.cQuantity, b.pName, b.price, b.thumbnail "
+                    + "from userCart a, product b "
+                    + "where a.mId=? and a.pid = b.pid "
                     + "order by ucId desc");
-                      
+            pstmt.setString(1, id);
+            
             rs = pstmt.executeQuery();
             
             if (rs.next()) {
                 List<UserCartDTO> cartList = new ArrayList<UserCartDTO>();
                 
                 do {
-                    cartList.add(makeUserFromResultSet(rs));
+                    cartList.add(makeUserCartFromResultSet(rs));
                 } while (rs.next());
                 
                 return cartList;
@@ -93,12 +94,13 @@ public class OrderDAO {
         pstmt.executeUpdate();
     }
 
-    public void addCart(Connection conn, int pId, int quantity) throws SQLException {
+    public void addCart(Connection conn, UserCartDTO cart) throws SQLException {
         
         PreparedStatement pstmt = null;        
-        pstmt = conn.prepareStatement("insert into userCart values(ucId_seq.nextval, ?, ?)");
-        pstmt.setInt(1, pId);
-        pstmt.setInt(2, quantity);
+        pstmt = conn.prepareStatement("insert into userCart values(ucId_seq.nextval, ?, ?, ?)");
+        pstmt.setString(1, cart.getmId());
+        pstmt.setInt(2, cart.getpId());
+        pstmt.setInt(3, cart.getcQuantity());
         pstmt.executeUpdate();
     }
     

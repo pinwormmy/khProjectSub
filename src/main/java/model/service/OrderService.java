@@ -22,7 +22,7 @@ public class OrderService {
 	private OrderService() {
 	}
 	
-	public List<UserCartDTO> showUserCart() {
+	public List<UserCartDTO> showUserCart(String id) {
 		
         Connection conn = null;
         
@@ -30,7 +30,7 @@ public class OrderService {
             conn = ConnectionProvider.getConnection();
             OrderDAO orderDAO = OrderDAO.getInstance();
             
-            return orderDAO.showUserCart(conn);
+            return orderDAO.showUserCart(conn, id);
             
         } catch (SQLException e) {
             JdbcUtil.printSQLException(e);
@@ -39,13 +39,13 @@ public class OrderService {
         return null;
     }
 	
-    public void addCart(int pId, int quantity) {
+    public void addCart(UserCartDTO cart) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             OrderDAO orderDAO = OrderDAO.getInstance();
             
-            orderDAO.addCart(conn, pId, quantity);
+            orderDAO.addCart(conn, cart);
             
         } catch (SQLException e) {
             JdbcUtil.printSQLException(e);
