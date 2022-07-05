@@ -11,6 +11,8 @@ import model.dto.NuserCartDTO;
 
 //서브 파일이다 원본파일이랑 구분 잘해라!!!
 
+// 비회원 카트 삭제. 회원카트로 진행
+
 public class OrderService {
 	
 	private static OrderService instance = new OrderService();
@@ -21,7 +23,6 @@ public class OrderService {
 
 	private OrderService() {
 	}
-	
 	public List<NuserCartDTO> showNuserCart() {
 		
         Connection conn = null;
