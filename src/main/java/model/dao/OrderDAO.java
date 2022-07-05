@@ -1,5 +1,7 @@
 package model.dao;
 
+// 서브 파일이다 원본파일이랑 구분 잘해라!!!
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

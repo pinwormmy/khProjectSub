@@ -9,6 +9,8 @@ import jdbc.connection.ConnectionProvider;
 import model.dao.OrderDAO;
 import model.dto.NuserCartDTO;
 
+//서브 파일이다 원본파일이랑 구분 잘해라!!!
+
 public class OrderService {
 	
 	private static OrderService instance = new OrderService();
