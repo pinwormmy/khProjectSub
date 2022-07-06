@@ -22,9 +22,12 @@ public class OrderHandler implements CommandHandler {
             
             String mId = req.getParameter("mId");
             List<UserCartDTO> cartList = orderService.showUserCart(mId);   
-            req.setAttribute("cartList", cartList); 
+            req.setAttribute("cartList", cartList);
             
-            toPath = "/WEB-INF/view/order/cart.jsp";
+            if(orderService.checkEmptyCart(mId) != false)
+            	toPath = "/WEB-INF/view/order/cart.jsp";
+            else
+            	toPath = "/WEB-INF/view/order/emptyCart.jsp";
             
         }else if(fromPath.equals("/addCart.do")) {     
             

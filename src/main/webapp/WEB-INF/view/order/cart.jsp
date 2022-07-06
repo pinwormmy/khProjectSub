@@ -43,7 +43,7 @@
 											<th class="">선택</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody>																		
 									<c:forEach var="cart" items="${cartList}">
 										<tr class="">
 											<td class="">
@@ -61,8 +61,9 @@
 												href="<%=request.getContextPath()%>/deleteCart.do?mId=${member.mId}&ucId=${cart.ucId}">삭제</a> 												
 											</td>
 										</tr>
-									</c:forEach>
+									</c:forEach>			
 									</tbody>
+									
 								</table>
 					
 								<a href="<%=request.getContextPath()%>/checkout.do?mId=${member.mId}" class="btn btn-main pull-right">주문하기</a>

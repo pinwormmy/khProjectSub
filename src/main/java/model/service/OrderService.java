@@ -19,7 +19,7 @@ public class OrderService {
 	private static OrderService instance = new OrderService();
 	public static OrderService getInstance() {
 		return instance;
-	}
+	}	
 	private OrderService() {
 	}
 	
@@ -112,6 +112,23 @@ public class OrderService {
             JdbcUtil.printSQLException(e);
             JdbcUtil.close(conn);
         }   
+	}
+	
+	public boolean checkEmptyCart(String mId) {
+		
+		Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            OrderDAO orderDAO = OrderDAO.getInstance();
+            
+            return orderDAO.checkEmptyCart(conn, mId);
+            
+        } catch (SQLException e) {
+            JdbcUtil.printSQLException(e);
+            JdbcUtil.close(conn);
+        }   
+        
+        return true;
 	}
 
 }

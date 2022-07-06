@@ -172,6 +172,20 @@ public class OrderDAO {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
+	
+	public boolean checkEmptyCart(Connection conn, String mId) throws SQLException {
+		
+		ResultSet resultSet;
+		PreparedStatement pstmt = null; 
+		
+        pstmt = conn.prepareStatement("select * from userCart where mId=?");        
+        pstmt.setString(1, mId);                
+        resultSet = pstmt.executeQuery();      
+        
+        if (resultSet.next())
+            return true;      
+        else
+        	return false;
+	}
 }
 
