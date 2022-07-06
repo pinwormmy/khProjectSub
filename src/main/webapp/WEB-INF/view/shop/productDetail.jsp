@@ -98,7 +98,6 @@
 						<input type="hidden" name="pId" value="<%=rs.getString("pId")%>">
 						<button type="button" class="btn btn-main mt-20" id="cartBtn" onclick="checkQuantity();">Add To Cart</button>
 					</form>
-					
 				</div>
 			</div>
 		</div>

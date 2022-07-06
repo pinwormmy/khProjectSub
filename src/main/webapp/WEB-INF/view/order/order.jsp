@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jspf" %>
 
 <section class="page-header">
@@ -42,51 +42,17 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach var="order" items="${orderList}">
 								<tr>
-									<td>#451231</td>
-									<td>2016-03-25</td>
-									<td>비빔밥 밀키트(3EA)</td>
-									<td>2</td>
-									<td>40,000원</td>
-									<td><span class="label label-primary">입금준비중</span></td>
+									<td> ${order.oId} </td>
+									<td>${order.oDate}</td>
+									<td>${order.pName}</td>
+									<td>${order.quantity}</td>
+									<td>${order.price}</td>
+									<td><span class="label label-primary">${order.statusName}</span></td>
 									<td><a href="<%=request.getContextPath()%>/order/detail.do" class="btn btn-default">View</a></td>
 								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>2016-03-25</td>
-									<td>해물 비빔 쌀국수 밀키트(5EA)</td>
-									<td>3</td>
-									<td>69,000원</td>
-									<td><span class="label label-success">배송준비중</span></td>
-									<td><a href="<%=request.getContextPath()%>/order/detail.do" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>2016-03-25</td>
-									<td>토마토 파스타 밀키트(2EA)</td>
-									<td>3</td>
-									<td>51,000원</td>
-									<td><span class="label label-danger">주문취소</span></td>
-									<td><a href="<%=request.getContextPath()%>/order/detail.do" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>2016-03-25</td>
-									<td>해물 비빔 쌀국수 밀키트(5EA)</td>
-									<td>2</td>
-									<td>46,000원</td>
-									<td><span class="label label-info">배송중</span></td>
-									<td><a href="<%=request.getContextPath()%>/order/detail.do" class="btn btn-default">View</a></td>
-								</tr>
-								<tr>
-									<td>#451231</td>
-									<td>2016-03-25</td>
-									<td>비빔밥 밀키트(3EA)</td>
-									<td>3</td>
-									<td>60,000원</td>
-									<td><span class="label label-warning">거래완료</span></td>
-									<td><a href="<%=request.getContextPath()%>/order/detail.do" class="btn btn-default">View</a></td>
-								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

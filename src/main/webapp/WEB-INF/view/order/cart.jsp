@@ -65,8 +65,7 @@
 									</tbody>
 								</table>
 					
-								<a href="<%=request.getContextPath()%>/checkout.do"
-									class="btn btn-main pull-right">주문하기</a>
+								<a href="<%=request.getContextPath()%>/checkout.do?mId=${member.mId}" class="btn btn-main pull-right">주문하기</a>
 							</form>
 						</div>
 					</div>

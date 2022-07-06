@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import model.dto.MemberDTO;
+import model.dto.OrderDTO;
 import model.dto.UserCartDTO;
 import model.service.OrderService;
 
@@ -42,7 +40,7 @@ public class OrderHandler implements CommandHandler {
             orderService.addCart(cart);
             
             req.setAttribute("msg", "장바구니에 넣었습니다~");
-            req.setAttribute("url", "cart.do?mId=" + mId); // 테스트 확인 차원에서 카트로 이동 
+            req.setAttribute("url", "cart.do?mId=" + mId);
             toPath = "/WEB-INF/view/alert.jsp";
                         
         }else if(fromPath.equals("/deleteCart.do")) {
@@ -63,13 +61,27 @@ public class OrderHandler implements CommandHandler {
             
             toPath = "/WEB-INF/view/order/checkout.jsp";
             
-        }else if(fromPath.equals("/confirmation.do")) {                       
-            
+        }else if(fromPath.equals("/confirmation.do")) {  
+        	
             toPath = "/WEB-INF/view/order/confirmation.jsp";
             
-        }else if(fromPath.equals("/order.do")) {                       
+        }else if(fromPath.equals("/order.do")) { 
+        	
+        	String mId = req.getParameter("mId");
+            List<OrderDTO> orderList = orderService.showOrderList(mId);   
+            req.setAttribute("orderList", orderList); 
             
             toPath = "/WEB-INF/view/order/order.jsp";
+            
+        }else if(fromPath.equals("/addOrder.do")) { 
+        	            
+            String mId = req.getParameter("mId");            
+            orderService.addOrder(mId);  
+            orderService.resetCart(mId);             
+            
+            req.setAttribute("msg", "밀슐랭~주문~");
+            req.setAttribute("url", "order.do?mId=" + mId);
+            toPath = "/WEB-INF/view/alert.jsp";
             
         }else {
             toPath = "/WEB-INF/view/error.jsp";

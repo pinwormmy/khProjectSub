@@ -147,8 +147,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 									<li><a 	<c:if test="${member != null}">href="<%=request.getContextPath()%>/cart.do?mId=${member.mId}"</c:if>
 									<c:if test="${member == null}">href="<%=request.getContextPath()%>/login.do"</c:if>
 									class="btn btn-small">View Cart</a></li>
-									<li><a href="<%=request.getContextPath()%>/checkout.do"
-										class="btn btn-small btn-solid-border">Checkout</a></li>
+									<li><a href="<%=request.getContextPath()%>/order.do?mId=${member.mId}"
+										class="btn btn-small btn-solid-border">Order List</a></li>
 								</ul>
 							</div></li>
 						<!-- / Cart -->

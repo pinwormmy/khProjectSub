@@ -10,7 +10,7 @@
 				<div class="content">
 					<h1 class="page-name">주문하기</h1>
 					<ol class="breadcrumb">
-						<li><a href="<%=request.getContextPath()%>/aviato/index.html">메인 홈페이지</a></li>
+						<li><a href="<%=request.getContextPath()%>/index.do">메인 홈페이지</a></li>
 						<li class="active">결제</li>
 					</ol>
 				</div>
@@ -25,14 +25,14 @@
             <div class="col-md-8">
                <div class="block billing-details">
                   <h4 class="widget-title">배송지</h4>
-                  <form class="checkout-form">
+                  <form class="checkout-form" action="/order.do" method="post">
                      <div class="form-group">
                         <label for="full_name">이름</label>
-                        <input type="text" class="form-control" id="full_name" placeholder="">
+                        <input type="text" class="form-control" id="full_name" value="${member.mName}" placeholder="">
                      </div>
                      <div class="form-group">
                         <label for="user_address">주소</label>
-                        <input type="text" class="form-control" id="user_address" placeholder="">
+                        <input type="text" class="form-control" name="oAddress" id="user_address" value="${member.address}" placeholder="">
                      </div>
                      <div class="checkout-country-code clearfix">
                         <div class="form-group">
@@ -71,7 +71,7 @@
                                  <label for="card-cvc">CVC 번호 <span class="required">*</span></label>
                                  <input id="card-cvc" class="form-control"  type="tel" maxlength="4" placeholder="CVC" >
                               </div>
-                              <a href="<%=request.getContextPath()%>/confirmation.do" class="btn btn-main mt-20">주문하기</a >
+                              <a href="<%=request.getContextPath()%>/addOrder.do?mId=${member.mId}" class="btn btn-main mt-20">주문하기</a >
                            </form>
                         </div>
                      </div>
@@ -83,9 +83,8 @@
                   <div class="block">
                      <h4 class="widget-title">주문 내역</h4>
                      
-                     <c:set var="sumPrice" value="0" />                     
-                     <c:forEach var="cart" items="${cartList}">
-                     
+                     <c:set var="sumPrice" value="0" />                                          
+                     <c:forEach var="cart" items="${cartList}"> 
                      
                      <div class="media product-card">
                         <a class="pull-left" href="<%=request.getContextPath()%>/shop/detail.do?pId=${cart.pId}">
@@ -93,12 +92,15 @@
                         </a>
                         <div class="media-body">
                            <h4 class="media-heading"><a href="<%=request.getContextPath()%>/shop/detail.do?pId=${cart.pId}">${cart.pName}</a></h4>
-                           <p class="price">${cart.quantity} x ${cart.price}</p>
-                           <a class="remove" href="<%=request.getContextPath()%>/deleteCart.do?ncId=${cart.ncId}">삭제하기</a>
+                           <p class="price">${cart.cQuantity} x ${cart.price}</p>
+                           <a class="remove" href="<%=request.getContextPath()%>/deleteCart.do?mId=${member.mId}&ucId=${cart.ucId}">삭제하기</a>
                         </div>
                      </div>
-                     <c:set var="sumPrice" value="${sumPrice + cart.quantity * cart.price}" />
-                     </c:forEach>                    
+                     
+                     <c:set var="sumPrice" value="${sumPrice + cart.cQuantity * cart.price}" />
+                     
+                     </c:forEach>   
+                                      
                      <!-- 포인트 아직 미구현. 다음 프로젝트때 도입예정
                      <div class="discount-code">
                         <p> 포인트가 있으신가요? <a data-toggle="modal" data-target="#coupon-modal" href="#!">enter it here</a></p>
