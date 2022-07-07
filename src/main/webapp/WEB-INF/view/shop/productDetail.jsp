@@ -125,7 +125,7 @@
 						<li class="active"><a data-toggle="tab" href="#details"
 							aria-expanded="true">Details</a></li>
 						<li class=""><a data-toggle="tab" href="#reviews"
-							aria-expanded="false">Reviews (3)</a></li>
+							aria-expanded="false">Reviews</a></li>
 					</ul>
 					<div class="tab-content patternbg">
 						<div id="details" class="tab-pane fade active in">
@@ -136,80 +136,36 @@
 							<div class="post-comments">
 								<ul class="media-list comments-list m-bot-50 clearlist">
 									<!-- Comment Item start-->
-									<li class="media"><a class="pull-left" href="#!"> <img
-											class="media-object comment-avatar"
-											src="images/blog/avater-1.jpg" alt="" width="50" height="50" />
-									</a>
-
+									<c:if test="${empty reviewList}"><h3 class="comment-author">아직 리뷰가 없네요~~</h3></c:if>
+									<c:forEach var="review" items="${reviewList}">
+									<li class="media">
+										<h4 class="comment-author">${review.mId}</h4>
 										<div class="media-body">
-											<div class="comment-info">
-												<h4 class="comment-author">
-													<a href="#!">Jonathon Andrew</a>
-
-												</h4>
-												<time datetime="2013-04-06T13:53">July 02, 2015, at
-													11:34</time>
+											<div class="comment-info">												
+												<time datetime="2013-04-06T13:53"> ${review.regDate} </time>
 												<a class="comment-button" href="#!"><i
 													class="tf-ion-chatbubbles"></i>Reply</a>
 											</div>
-
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Quisque at magna ut ante eleifend eleifend.Lorem ipsum
-												dolor sit amet, consectetur adipisicing elit. Quod laborum
-												minima, reprehenderit laboriosam officiis praesentium?
-												Impedit minus provident assumenda quae.</p>
-										</div></li>
+											<p>${review.content}</p>
+										</div>
+									</li>
+									</c:forEach>
 									<!-- End Comment Item -->
-
-									<!-- Comment Item start-->
-									<li class="media"><a class="pull-left" href="#!"> <img
-											class="media-object comment-avatar"
-											src="images/blog/avater-4.jpg" alt="" width="50" height="50" />
-									</a>
-
+									<c:if test="${member != null}">
+									<li class="media">
 										<div class="media-body">
-
 											<div class="comment-info">
-												<div class="comment-author">
-													<a href="#!">Jonathon Andrew</a>
-												</div>
-												<time datetime="2013-04-06T13:53">July 02, 2015, at
-													11:34</time>
-												<a class="comment-button" href="#!"><i
-													class="tf-ion-chatbubbles"></i>Reply</a>
-											</div>
-
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Quisque at magna ut ante eleifend eleifend. Lorem
-												ipsum dolor sit amet, consectetur adipisicing elit. Magni
-												natus, nostrum iste non delectus atque ab a accusantium
-												optio, dolor!</p>
-
-										</div></li>
-									<!-- End Comment Item -->
-
-									<!-- Comment Item start-->
-									<li class="media"><a class="pull-left" href="#!"> <img
-											class="media-object comment-avatar"
-											src="images/blog/avater-1.jpg" alt="" width="50" height="50">
-									</a>
-
-										<div class="media-body">
-
-											<div class="comment-info">
-												<div class="comment-author">
-													<a href="#!">Jonathon Andrew</a>
-												</div>
-												<time datetime="2013-04-06T13:53">July 02, 2015, at
-													11:34</time>
-												<a class="comment-button" href="#!"><i
-													class="tf-ion-chatbubbles"></i>Reply</a>
-											</div>
-
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Quisque at magna ut ante eleifend eleifend.</p>
-
-										</div></li>
+												<form action="<%=request.getContextPath()%>/addReview.do">
+													<h4 class="comment-author">${member.mId}</h4>
+													<input type="hidden" name="mId" value="${member.mId}">
+													<input type="hidden" name="pId" value="<%=rs.getString("pId")%>">
+													<textarea name="content" cols="150" rows="5" required></textarea>
+													<button>write review</button>
+												</form>												
+											</div>											
+										</div>
+									</li>
+									</c:if>									
 								</ul>
 							</div>
 						</div>
