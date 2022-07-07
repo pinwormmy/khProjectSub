@@ -112,9 +112,7 @@
 					addCartForm.submit();
 				}else
 					alert("수량을 하나 이상 골라주세요!!!!")
-			}	
-			
-			
+			}				
 			
 		</script>
 

@@ -65,30 +65,14 @@ FACEBOOK: https://www.facebook.com/themefisher
 			<div class="row">
 				<div class="col-md-4 col-xs-12 col-sm-4">
 					<div class="contact-number">
-						<i class="tf-ion-ios-telephone"></i> <span>0129-
-							12323-123123</span>
+						<i class="tf-ion-ios-telephone"></i> <span>010-
+							1234-5678</span>
 					</div>
 				</div>
 				<div class="col-md-4 col-xs-12 col-sm-4">
 					<!-- Site Logo -->
 					<div class="logo text-center">
-						<a href="<%=request.getContextPath()%>/index.do"> <!-- replace logo here -->
-							<svg width="135px" height="29px" viewBox="0 0 155 29"
-								version="1.1" xmlns="http://www.w3.org/2000/svg"
-								xmlns:xlink="http://www.w3.org/1999/xlink">
-							<g id="Page-1" stroke="none" stroke-width="1" fill="none"
-									fill-rule="evenodd" font-size="40"
-									font-family="AustinBold, Austin" font-weight="bold">
-								<g id="Group" transform="translate(-108.000000, -297.000000)"
-									fill="#000000">
-
-									<text id="AVIATO">
-										<tspan x="108.94" y="325">mealkit</tspan>
-									</text>
-								</g>
-							</g>
-						</svg>
-						</a>
+						<h1><a href="<%=request.getContextPath()%>/index.do">MEALCHELIN</a></h1>
 					</div>
 				</div>
 				<div class="col-md-4 col-xs-12 col-sm-4">
@@ -98,7 +82,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 							class="dropdown-toggle" data-toggle="dropdown"
 							data-hover="dropdown"><i class="tf-ion-android-cart"></i>Cart</a>
 							<div class="dropdown-menu cart-dropdown">
-								<!-- Cart Item -->
+							<!-- 
+								<!-- Cart Item
 								<div class="media">
 									<a class="pull-left" href="#!"> <img class="media-object"
 										src="<%=request.getContextPath()%>/aviato/images/shop/cart/cart-1.jpg"
@@ -117,31 +102,12 @@ FACEBOOK: https://www.facebook.com/themefisher
 									</div>
 									<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
 								</div>
-								<!-- / Cart Item -->
-								<!-- Cart Item -->
-								<div class="media">
-									<a class="pull-left" href="#!"> <img class="media-object"
-										src="<%=request.getContextPath()%>/aviato/images/shop/cart/cart-2.jpg"
-										alt="image" />
-									</a>
-									<div class="media-body">
-										<h4 class="media-heading">
-											<a href="#!">Ladies Bag</a>
-										</h4>
-										<div class="cart-price">
-											<span>1 x</span> <span>1250.00</span>
-										</div>
-										<h5>
-											<strong>$1200</strong>
-										</h5>
-									</div>
-									<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-								</div>
-								<!-- / Cart Item -->
-
+										
+ 
 								<div class="cart-summary">
 									<span>Total</span> <span class="total-price">$1799.00</span>
 								</div>
+								 -->		
 								<!-- 로그인 여부에 따라 카트 아니면 로그인 화면. 이거 구분처리 컨트롤러에서 해야할 듯하지만, 일단 이렇게 구현 -->
 								<ul class="text-center cart-buttons">
 									<li><a 	<c:if test="${member != null}">href="<%=request.getContextPath()%>/cart.do?mId=${member.mId}"</c:if>
