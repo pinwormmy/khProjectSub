@@ -42,8 +42,7 @@
 		    rs = pstmt.executeQuery();
 
 		    while (rs.next()) {
-		%>
-		
+		%>		
 
 		<div class="row">
 			<div class="col-md-6">
@@ -128,7 +127,8 @@
 					<div class="tab-content patternbg">
 						<div id="details" class="tab-pane fade active in">
 							<h4>Product Description</h4>
-							<img src='<%=request.getContextPath()%><%=rs.getString("image")%>'>
+							
+							<img src="<%=request.getContextPath()%><%=rs.getString("image")%>">
 						</div>
 						<div id="reviews" class="tab-pane fade">
 							<div class="post-comments">
